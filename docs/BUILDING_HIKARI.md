@@ -18,6 +18,8 @@ cd llvm-project
 git checkout hikari-obfuscation
 ```
 
+> **Note:** The upstream base branch is `apple-arm64e-upstream-next` (Apple's LLVM 19 fork with arm64e/ptrauth support). The `hikari-obfuscation` branch is based on top of that.
+
 ## 2. Configure
 
 ```bash
