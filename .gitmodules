@@ -1,0 +1,6 @@
+[submodule "llvm/include/llvm/Transforms/Obfuscation"]
+	path = llvm/include/llvm/Transforms/Obfuscation
+	url = git@github.com:malhaar/hikari-obfuscation-headers.git
+[submodule "llvm/lib/Transforms/Obfuscation"]
+	path = llvm/lib/Transforms/Obfuscation
+	url = git@github.com:malhaar/hikari-obfuscation-core.git

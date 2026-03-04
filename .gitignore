@@ -31,6 +31,7 @@
 
 # Nested build directory
 /build*
+/install*
 
 #==============================================================================#
 # Explicit files to ignore (only matches one).
