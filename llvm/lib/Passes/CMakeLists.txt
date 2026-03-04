@@ -15,6 +15,7 @@ add_llvm_component_library(LLVMPasses
   intrinsics_gen
 
   LINK_COMPONENTS
+  Obfuscation
   AggressiveInstCombine
   Analysis
   CFGuard

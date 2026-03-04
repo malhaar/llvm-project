@@ -81,6 +81,7 @@
 #include "llvm/Transforms/Instrumentation/SanitizerBinaryMetadata.h"
 #include "llvm/Transforms/Instrumentation/SanitizerCoverage.h"
 #include "llvm/Transforms/Instrumentation/SoftPointerAuth.h"
+#include "llvm/Transforms/Obfuscation/Obfuscation.h"
 #include "llvm/Transforms/Instrumentation/ThreadSanitizer.h"
 #include "llvm/Transforms/ObjCARC.h"
 #include "llvm/Transforms/Scalar/EarlyCSE.h"
@@ -1024,6 +1025,11 @@ void EmitAssemblyHelper::RunOptimizationPipeline(
           [](ModulePassManager &MPM, OptimizationLevel Level) {
             MPM.addPass(SoftPointerAuthPass());
           });
+
+    PB.registerOptimizerLastEPCallback(
+        [](ModulePassManager &MPM, OptimizationLevel Level) {
+          MPM.addPass(ObfuscationPass());
+        });
 
     if (std::optional<GCOVOptions> Options =
             getGCOVOptions(CodeGenOpts, LangOpts))
