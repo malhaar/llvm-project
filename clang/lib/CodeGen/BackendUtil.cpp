@@ -83,6 +83,7 @@
 #include "llvm/Transforms/Instrumentation/SoftPointerAuth.h"
 #include "llvm/Transforms/Instrumentation/SanitizerCoverage.h"
 #include "llvm/Transforms/Instrumentation/ThreadSanitizer.h"
+#include "llvm/Transforms/Obfuscation/Obfuscation.h"
 #include "llvm/Transforms/ObjCARC.h"
 #include "llvm/Transforms/Scalar/EarlyCSE.h"
 #include "llvm/Transforms/Scalar/GVN.h"
@@ -779,6 +780,12 @@ static void addSanitizers(const Triple &TargetTriple,
     // LastEP does not need GlobalsAA.
     PB.registerOptimizerLastEPCallback(SanitizersCallback);
   }
+
+  // Hikari obfuscation passes
+  PB.registerOptimizerLastEPCallback(
+      [](ModulePassManager &MPM, OptimizationLevel Level) {
+        MPM.addPass(ObfuscationPass());
+      });
 
   if (LowerAllowCheckPass::IsRequested()) {
     // We can optimize after inliner, and PGO profile matching. The hook below
